@@ -16,7 +16,7 @@ function initMap() {
         var request = {
             location: penalolen,
             radius: '500',
-            query: 'taller'
+            query: 'restaurant'
         };
 
         var search = new google.maps.places.PlacesService(map);

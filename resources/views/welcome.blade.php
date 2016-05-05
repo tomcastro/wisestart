@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
     <meta name="theme-color" content="#2196F3">
-    <title>Wise Start</title>
+    <title>EmprendeYA!</title>
 
     <!-- CSS  -->
     <link href="min/plugin-min.css" type="text/css" rel="stylesheet">
@@ -63,7 +63,7 @@
     <nav id="nav_f" class="default_color" role="navigation">
         <div class="container">
             <div class="nav-wrapper">
-                <a href="#" id="logo-container" class="brand-logo">Wise Start</a>
+                <a href="#" id="logo-container" class="brand-logo">EmprendeYA!</a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="#intro">Servicios</a></li>
                     <li><a href="#work">Work</a></li>
@@ -91,7 +91,7 @@
                 <b class="is-visible">Innovar</b>
                 <b>poner mi negocio</b>
                 <b>Peñalolén</b>
-                <b>Wisestart</b>
+                <b>EmprendeYA!</b>
             </span>
         </h1>
     </div>
@@ -102,7 +102,7 @@
     <div class="container">
         <div class="row">
             <div class="col s12">
-                <h2 class="center header text_h2"> Con Wise Start encontraras toda la <span
+                <h2 class="center header text_h2"> Con EmprendeYA! encontraras toda la <span
                             class="span_h2"> información</span> territorial que <span class="span_h2"> necesitas</span>
                     antes de <span class="span_h2"> comenzar </span> con tu negocio. </h2>
             </div>
@@ -346,7 +346,7 @@
                         <img class="activator" src="img/avatar4.png">
                     </div>
                     <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">Robin<br/>
+                        <span class="card-title activator grey-text text-darken-4">Beltrán<br/>
                             <small><em><a class="red-text text-darken-1" href="#">Developer</a></em></small></span>
                         <p>
                             <a class="blue-text text-lighten-2" href="https://www.facebook.com/joash.c.pereira">
