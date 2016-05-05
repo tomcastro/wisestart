@@ -15,12 +15,12 @@ function initMap() {
 
         var request = {
             location: penalolen,
-            radius: "500",
-            query: value
+            radius: '500',
+            query: 'taller'
         };
 
         var search = new google.maps.places.PlacesService(map);
-        search.search(request, callback);
+        search.textSearch(request, callback);
     });
 }
 
@@ -34,7 +34,6 @@ function callback(results, status) {
 }
 
 function createMarker(place) {
-    console.log(place.name);
     var marker = new google.maps.Marker({
         map: map,
         title: place.name,
