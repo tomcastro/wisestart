@@ -8,33 +8,43 @@
 
     <!-- CSS  -->
     <link href="min/plugin-min.css" type="text/css" rel="stylesheet">
-    <link href="min/custom-min.css" type="text/css" rel="stylesheet" >
+    <link href="min/custom-min.css" type="text/css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+
 
     <!--- React -->
     <script src="js/build/react.js"></script>
     <script src="js/build/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 
     <script type="text/babel">
-        
-      var ExampleApplication = React.createClass({
-        render: function() {
-          var elapsed = Math.round(this.props.elapsed  / 100);
-          var seconds = elapsed / 10 + (elapsed % 10 ? '' : '.0' );
-          var message =
-            'React has been successfully running for ' + seconds + ' seconds.';
 
-          return <p>{message}</p>;
-        }
-      });
-      var start = new Date().getTime();
-      setInterval(function() {
-        ReactDOM.render(
-          <ExampleApplication elapsed={new Date().getTime() - start} />,
-          document.getElementById('container')
-        );
-      }, 50);
-    
+        /*var ExampleApplication = React.createClass({
+            render: function () {
+                var elapsed = Math.round(this.props.elapsed / 100);
+                var seconds = elapsed / 10 + (elapsed % 10 ? '' : '.0' );
+                var message =
+                        'React has been successfully running for ' + seconds + ' seconds.';
+
+                return
+                <
+                p > {message} < / p >;
+            }
+        });
+        var start = new Date().getTime();
+        setInterval(function () {
+            ReactDOM.render(
+            < ExampleApplication
+            elapsed = {new Date().getTime() - start} / >,
+                    document.getElementById('container')
+            )
+            ;
+        }, 50);*/
+
     </script>
 </head>
 <body id="top" class="scrollspy">
@@ -42,33 +52,31 @@
 <!-- Pre Loader -->
 <div id="loader-wrapper">
     <div id="loader"></div>
- 
+
     <div class="loader-section section-left"></div>
     <div class="loader-section section-right"></div>
- 
+
 </div>
 
 <!--Navigation-->
- <div class="navbar-fixed">
+<div class="navbar-fixed">
     <nav id="nav_f" class="default_color" role="navigation">
         <div class="container">
             <div class="nav-wrapper">
-            <a href="#" id="logo-container" class="brand-logo">Wise Start</a>
+                <a href="#" id="logo-container" class="brand-logo">Wise Start</a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="#intro">Servicios</a></li>
                     <li><a href="#work">Work</a></li>
                     <li><a href="#team">Team</a></li>
                     <li><a href="#contact">Contacto</a></li>
-                    <li><a href="https://github.com/joashp/material-design-template" target="_blank">Download</a></li>
                 </ul>
                 <ul id="nav-mobile" class="side-nav">
                     <li><a href="#intro">Servicios</a></li>
                     <li><a href="#work">Work</a></li>
                     <li><a href="#team">Team</a></li>
                     <li><a href="#contact">Contacto</a></li>
-                    <li><a href="https://github.com/joashp/material-design-template" target="_blank">Download</a></li>
                 </ul>
-            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+                <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
             </div>
         </div>
     </nav>
@@ -78,11 +86,12 @@
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
         <h1 class="text_h center header cd-headline letters type">
-            <span>Me encanta</span> 
+            <span>Me encanta</span>
             <span class="cd-words-wrapper waiting">
-                <b class="is-visible">Ebusiness</b>
-                <b>Wise Start</b>
-                <b>Peñalolen</b>
+                <b class="is-visible">Innovar</b>
+                <b>poner mi negocio</b>
+                <b>Peñalolén</b>
+                <b>Wisestart</b>
             </span>
         </h1>
     </div>
@@ -92,29 +101,35 @@
 <div id="intro" class="section scrollspy">
     <div class="container">
         <div class="row">
-            <div  class="col s12">
-                <h2 class="center header text_h2"> Con Wise Start encontraras toda la <span class="span_h2"> información</span> territorial que <span class="span_h2"> necesitas</span> antes de   <span class="span_h2"> comenzar </span> con tu negocio. </h2>
+            <div class="col s12">
+                <h2 class="center header text_h2"> Con Wise Start encontraras toda la <span
+                            class="span_h2"> información</span> territorial que <span class="span_h2"> necesitas</span>
+                    antes de <span class="span_h2"> comenzar </span> con tu negocio. </h2>
             </div>
 
-            <div  class="col s12 m4 l4">
+            <div class="col s12 m4 l4">
                 <div class="center promo promo-example">
                     <i class="mdi-social-public"></i>
                     <h5 class="promo-caption">Información Sectorizada</h5>
-                    <p class="light center">Obten la información por sectores de terreno. Nivel de competencia, regulación actual, etc..</p>
+                    <p class="light center">Obten la información por sectores de terreno. Nivel de competencia,
+                        regulación actual, etc..</p>
                 </div>
             </div>
             <div class="col s12 m4 l4">
                 <div class="center promo promo-example">
                     <i class="mdi-social-group"></i>
                     <h5 class="promo-caption"> Diseñado para emprendedores</h5>
-                    <p class="light center">Nustro objetivo es darle a nuevos emprendedores con ganas de instalar algún tipo de negocio toda la información importante que deberían saber antes de tomar alguna decision..</p>
+                    <p class="light center">Nustro objetivo es darle a nuevos emprendedores con ganas de instalar algún
+                        tipo de negocio toda la información importante que deberían saber antes de tomar alguna
+                        decision..</p>
                 </div>
             </div>
             <div class="col s12 m4 l4">
                 <div class="center promo promo-example">
                     <i class="mdi-hardware-desktop-windows"></i>
                     <h5 class="promo-caption">Totalmente Web</h5>
-                    <p class="light center">Sin instalaciones de programas dificiles de usar. Diseñado para que el usuario pueda usarlo sin ayuda de terceros.</p>
+                    <p class="light center">Sin instalaciones de programas dificiles de usar. Diseñado para que el
+                        usuario pueda usarlo sin ayuda de terceros.</p>
                 </div>
             </div>
         </div>
@@ -124,9 +139,27 @@
 <!--Work-->
 <div class="section scrollspy" id="work">
     <div class="container">
-        <h2 class="header text_b">Work </h2>
+        <h2 class="header text_b">Mapa </h2>
         <div class="row">
-            <div class="col s12 m4 l4">
+            <h4 class="header text_b">Elige tu rubro</h4>
+
+            <div class="input-field">
+                <select class="browser-default" id="rubro">
+                    <option value="" disabled selected>Elige una opción</option>
+                    <option value="1">Taller automotriz</option>
+                    <option value="2">Tienda de servicio</option>
+                    <option value="3">Restaurante</option>
+                </select>
+            </div>
+
+            <div class="card" style="height: 500px">
+
+                    <div id="map" class="card-content" style="height: 500px"></div>
+
+
+            </div>
+
+            {{--<div class="col s12 m4 l4">
                 <div class="card">
                     <div class="card-image waves-effect waves-block waves-light">
                         <img class="activator" src="img/project1.jpg">
@@ -215,7 +248,7 @@
                         <p>Here is some more information about this project that is only revealed once clicked on.</p>
                     </div>
                 </div>
-            </div>
+            </div>--}}
         </div>
     </div>
 </div>
@@ -228,7 +261,7 @@
 <!--Team-->
 <div class="section scrollspy" id="team">
     <div class="container">
-        <h2 class="header text_b"> Our Team </h2>
+        <h2 class="header text_b"> Nuestro equipo </h2>
         <div class="row">
             <div class="col s12 m3">
                 <div class="card card-avatar">
@@ -236,7 +269,7 @@
                         <img class="activator" src="img/avatar1.png">
                     </div>
                     <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">Flash <br/>
+                        <span class="card-title activator grey-text text-darken-4">Tomás<br/>
                             <small><em><a class="red-text text-darken-1" href="#">CEO</a></em></small></span>
                         <p>
                             <a class="blue-text text-lighten-2" href="https://www.facebook.com/joash.c.pereira">
@@ -261,7 +294,7 @@
                         <img class="activator" src="img/avatar2.png">
                     </div>
                     <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">Cat Woman<br/>
+                        <span class="card-title activator grey-text text-darken-4">Feña<br/>
                             <small><em><a class="red-text text-darken-1" href="#">Designer</a></em></small>
                         </span>
                         <p>
@@ -338,7 +371,7 @@
 
 <!--Footer-->
 <footer id="contact" class="page-footer default_color scrollspy">
-    <div class="container">  
+    <div class="container">
         <div class="row">
             <div class="col l6 s12">
                 <form class="col s12" action="contact.php" method="post">
@@ -355,7 +388,8 @@
                         </div>
                         <div class="input-field col s12">
                             <i class="mdi-editor-mode-edit prefix white-text"></i>
-                            <textarea id="icon_prefix2" name="message" class="materialize-textarea white-text"></textarea>
+                            <textarea id="icon_prefix2" name="message"
+                                      class="materialize-textarea white-text"></textarea>
                             <label for="icon_prefix2" class="white-text">Message</label>
                         </div>
                         <div class="col offset-s7 s5">
@@ -402,15 +436,22 @@
     </div>
     <div class="footer-copyright default_color">
         <div class="container">
-            Made by <a class="white-text" href="http://joashpereira.com">Joash Pereira</a>. Thanks to <a class="white-text" href="http://materializecss.com/">materializecss</a>
+            Made by <a class="white-text" href="http://joashpereira.com">Joash Pereira</a>. Thanks to <a
+                    class="white-text" href="http://materializecss.com/">materializecss</a>
         </div>
     </div>
 </footer>
 
 
-    <!--  Scripts-->
-    <script src="min/plugin-min.js"></script>
-    <script src="min/custom-min.js"></script>
+<!--  Scripts-->
+<script src="min/plugin-min.js"></script>
+<script src="min/custom-min.js"></script>
+<script src="js/gmaps.js"></script>
+<script src="js/mapa.js"></script>
+<script src="js/searchForPlaces.js"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDa8MJk2VV9QBkzjnEratB11lpuxkcxgyE&libraries=places&callback=initMap">
+</script>
 
-    </body>
+</body>
 </html>
