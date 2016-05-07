@@ -1,4 +1,5 @@
 var map;
+var markers = [];
 
 function initMap() {
     var penalolen = new google.maps.LatLng(-33.4857978,-70.5487625);
@@ -8,19 +9,20 @@ function initMap() {
         zoom: 14
     });
 
-    var select = $('#rubro');
+    var typeSelect = $('#type');
 
-    select.on('change', function(){
-        var value = this.value;
+    typeSelect.on('change', function(){
+        var type = this.value;
 
+        clearMarkers();
         var request = {
             location: penalolen,
-            radius: '500',
-            query: 'restaurant'
+            radius: '1000',
+            types: [type]
         };
 
         var search = new google.maps.places.PlacesService(map);
-        search.textSearch(request, callback);
+        search.nearbySearch(request, callback);
     });
 }
 
@@ -36,8 +38,20 @@ function callback(results, status) {
 function createMarker(place) {
     var marker = new google.maps.Marker({
         map: map,
-        title: place.name,
         position: place.geometry.location
     });
+    markers.push(marker);
 }
 
+function setMapOnAll(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
+function clearMarkers() {
+  setMapOnAll(null);
+}
+function deleteMarkers() {
+  clearMarkers();
+  markers = [];
+}
