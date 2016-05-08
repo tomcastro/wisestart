@@ -100,6 +100,8 @@
                         <option value="bank">Banco</option>
                         <option value="store">Tienda de servicio</option>
                         <option value="car_rental">Car Rental</option>
+                        <option value="gym">Gym</option>
+                        <option value="pharmacy">Farmacia</option>
                     </select>
                 </div>
             </div>
