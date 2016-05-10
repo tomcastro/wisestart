@@ -3,7 +3,7 @@ var markers = [];
 var typeSelect = $('#type');
 
 function initMap() {
-    var penalolen = new google.maps.LatLng(-33.4857978,-70.5487625);
+    var penalolenCenter = new google.maps.LatLng(-33.4857978,-70.5487625);
 
 
     var penalolenCoords = [
@@ -21,7 +21,7 @@ function initMap() {
     {lat: -33.508544,  lng:-70.589516}];
 
     map = new google.maps.Map(document.getElementById('map'), {
-        center: penalolen,
+        center: penalolenCenter,
         zoom: 13
     });
 
@@ -48,8 +48,8 @@ function initMap() {
         deleteMarkers();
 
         var request = {
-            location: penalolen,
-            radius: '1000',
+            location: penalolenCenter,
+            radius: '3000',
             types: [type]
         };
 
