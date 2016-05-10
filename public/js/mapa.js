@@ -122,7 +122,7 @@ function initMap() {
         if(number == 0){
             poly.setOptions({fillColor: "#AAAAAA"});
         }
-        else if(number < 4){
+        else if(number < 9){
             poly.setOptions({fillColor: "#0000FF"});
         }
         else{
