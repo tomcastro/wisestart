@@ -104,6 +104,11 @@
                         <option value="pharmacy">Farmacia</option>
                     </select>
                 </div>
+                <h4>Comuna</h4>
+                <select class="browser-default" id="comuna">
+                    <option disabled selected>Elige una opción</option>
+                    <option>Peñalolen</option>
+                </select>
             </div>
             <div class="col s12 m12">
                 <div class="card" style="height: 400px">

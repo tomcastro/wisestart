@@ -1,8 +1,10 @@
 var map;
 var markers = [];
+var typeSelect = $('#type');
 
 function initMap() {
     var penalolen = new google.maps.LatLng(-33.4857978,-70.5487625);
+
 
     var penalolenCoords = [
     {lat: -33.459127,  lng: -70.572177},
@@ -20,32 +22,30 @@ function initMap() {
 
     map = new google.maps.Map(document.getElementById('map'), {
         center: penalolen,
-        zoom: 14
+        zoom: 13
     });
+
 
     var penalolenPoly = new google.maps.Polygon({
     paths: penalolenCoords,
     strokeColor: '#FF0000',
     strokeOpacity: 0.8,
     strokeWeight: 2,
-    fillColor: '#FF0000',
-    fillOpacity: 0.35
+    fillColor: '#FFFF00',
+    fillOpacity: 0.35,
+    editable: false
   });
 
 
 
-  penalolenPoly.setMap(map);
+    penalolenPoly.setMap(map);
 
-    var typeSelect = $('#type');
+    
 
     typeSelect.on('change', function(){
         var type = this.value;
 
-        clearMarkers();
-
-        var markersInPoly = countMarkersInside(penalolenPoly);
-        
-        ColorPolyByMarkers(penalolenPoly, markersInPoly);
+        deleteMarkers();
 
         var request = {
             location: penalolen,
@@ -55,23 +55,22 @@ function initMap() {
 
         var search = new google.maps.places.PlacesService(map);
         search.nearbySearch(request, callback);
-    });
 
+    });
+    
 
     function createMarker(place) {
         var marker = new google.maps.Marker({
             map: map,
             position: place.geometry.location
         });
-
+        markers.push(marker);
         var infowindow = new google.maps.InfoWindow({
            content: place.name
         });
 
         marker.addListener('click', function() {
         infowindow.open(map, marker);
-
-        markers.push(marker);
 
         });
     }
@@ -82,6 +81,8 @@ function initMap() {
                 var place = results[i];
                 createMarker(place);
             }
+            var markersInPoly = countMarkersInside(penalolenPoly);
+            ColorPolyByMarkers(penalolenPoly, markersInPoly);
         }
     }
 
@@ -107,26 +108,25 @@ function initMap() {
     function countMarkersInside(poly){
         var markersInside = 0;
         for (var i = 0; i < markers.length; i++) {
-            console.log(markers[i]);
           if(google.maps.geometry.poly.containsLocation(markers[i].position , poly))
           {
             markersInside++;
           }
         }
-        console.log("el numero de markers es " + markersInside);
-
         return markersInside;
     }
+  
 
     function ColorPolyByMarkers(poly, number){
+
         if(number == 0){
-            poly.fillColor = '#000000';
+            poly.setOptions({fillColor: "#AAAAAA"});
         }
-        else if(number < 3){
-            poly.fillColor = '#555555';
+        else if(number < 4){
+            poly.setOptions({fillColor: "#0000FF"});
         }
         else{
-            poly.fillColor = '#DDDDDD'
+            poly.setOptions({fillColor: "#FF0000"});
         }
     }
 
