@@ -104,10 +104,11 @@
                         <option value="pharmacy">Farmacia</option>
                     </select>
                 </div>
-                <h4>Comuna</h4>
-                <select class="browser-default" id="comuna">
+                <h4 class="header text_b">Comuna</h4>
+                <select class="browser-default" id="area">
                     <option disabled selected>Elige una opción</option>
-                    <option>Peñalolen</option>
+                    <option value="penalolen">Peñalolen</option>
+                    <option value="macul">Macul</option>
                 </select>
             </div>
             <div class="col s12 m12">
