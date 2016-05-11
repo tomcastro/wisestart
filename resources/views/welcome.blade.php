@@ -92,7 +92,7 @@
     <div class="container">
         <h2 class="header text_b">Mapa </h2>
         <div class="row">
-             <div class="col s4 m4">
+             <div class="col s12 m4">
                 <h4 class="header text_b">Comuna</h4>
                 <select class="browser-default" id="area">
                     <option disabled selected>Elige una opción</option>
@@ -100,7 +100,7 @@
                     <option value="macul">Macul</option>
                 </select>
             </div>
-            <div class="col s4 m4">
+            <div class="col s12 m4">
                 <h4 class="header text_b">Elige tu rubro</h4>
                 <div class="input-field">
                     <select disabled class="browser-default" id="type">
@@ -113,7 +113,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col s4 m4">
+            <div class="col s12 m4">
                 <h4 class="header text_b">Trafico</h4>
                 <select class="browser-default" id="traffic">
                     <option value="0" selected>Ninguno</option>
