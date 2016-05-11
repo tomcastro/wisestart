@@ -3,58 +3,7 @@ var markers = [];
 var activeArea;
 var typeSelect = $('#type');
 var areaSelect = $('#area');
-
-class Area {
-    constructor(center, polygons) {
-        this.center = center;
-        this.polygons = polygons;
-    }
-
-    colorByMarkers(){
-        for(let polygon of this.polygons)
-        {
-            let markersInside = this.countMarkersInside(polygon);
-
-            if(markersInside < 10)
-            {
-                polygon.setOptions({fillColor: "#00FF00"});
-            }
-            else
-            {
-               polygon.setOptions({fillColor: "#FF0000"}); 
-            }
-        }
-        
-    }
-
-    countMarkersInside(polygon){
-        let markersInside = 0;
-
-        for(let value of markers)
-        {
-            if(google.maps.geometry.poly.containsLocation(value.position, polygon))
-            {
-                markersInside++;
-            }
-        }
-        return markersInside;
-    }
-    clear(){
-        for(let polygon of this.polygons)
-        {
-            polygon.setMap(null);
-        }
-    }
-
-    show(){
-
-        for(let polygon of this.polygons)
-        {
-            polygon.setMap(map);
-        }
-    }
-}
-
+var trafficSelect = $('#traffic');
 
 function initMap() {
 
@@ -80,6 +29,12 @@ function initMap() {
     var maculCoordinates = [
     {lat: -33.474948,  lng: -70.623122},
     {lat: -33.469853,  lng: -70.576726},
+    {lat: -33.489957,  lng: -70.580916},
+    {lat: -33.491578,  lng: -70.617487}];
+
+    var maculCoordinates2 = [
+    {lat: -33.491578,  lng: -70.617487},
+    {lat: -33.489957,  lng: -70.580916},
     {lat: -33.509868,  lng: -70.590519},
     {lat: -33.508092,  lng: -70.613971}];
 
@@ -88,7 +43,7 @@ function initMap() {
         strokeColor: '#FF0000',
         strokeOpacity: 0.8,
         strokeWeight: 2,
-        fillColor: '#66FFFF',
+        fillColor: '#33FFFF',
         fillOpacity: 0.35,
         editable: false
       });
@@ -98,7 +53,17 @@ function initMap() {
         strokeColor: '#FF0000',
         strokeOpacity: 0.8,
         strokeWeight: 2,
-        fillColor: '#66FFFF',
+        fillColor: '#33FFFF',
+        fillOpacity: 0.35,
+        editable: false
+    });
+
+    var maculPoly2 = new google.maps.Polygon({
+        paths: maculCoordinates2,
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#33FFFF',
         fillOpacity: 0.35,
         editable: false
     });
@@ -107,7 +72,7 @@ function initMap() {
     const maculCenter = new google.maps.LatLng(-33.489865, -70.598398);
 
     var penalolen = new Area(penalolenCenter, [penalolenPoly]);
-    var macul = new Area(maculCenter, [maculPoly]);
+    var macul = new Area(maculCenter, [maculPoly, maculPoly2]);
     
 
     activeArea = penalolen;
@@ -123,10 +88,6 @@ function initMap() {
     });
 
 
-
-
-
-    
 
     typeSelect.on('change', function(){
         var type = this.value;
@@ -146,11 +107,14 @@ function initMap() {
 
     
     areaSelect.on('change', function(){
-        if(this.value != null)
-        {
-             $('#area').prop('disabled', false);
-        }
         let area = this.value;
+
+        if(this.value != null)
+        {   
+            typeSelect.prop('disabled', false);
+            typeSelect.val("0");
+        }
+        
 
         activeArea.clear();
         deleteMarkers();
@@ -167,7 +131,32 @@ function initMap() {
             console.log("default");
             break;
         }
-        activeArea.show()
+        activeArea.resetColor();
+        map.panTo(activeArea.center);
+        activeArea.show();
+    });
+    var bikeLayer = new google.maps.BicyclingLayer();
+    var trafficLayer = new google.maps.TrafficLayer();
+    
+    trafficSelect.on('change', function(){
+        let type = this.value;
+
+        switch (type) {
+            case "auto":
+                bikeLayer.setMap(null);
+                trafficLayer.setMap(map);
+                break;
+
+            case "bici":
+                trafficLayer.setMap(null);
+                bikeLayer.setMap(map);
+                break;
+
+            default:
+                trafficLayer.setMap(null);
+                bikeLayer.setMap(null);
+                break;
+        }
     });
     
 
@@ -200,31 +189,23 @@ function initMap() {
                     }
                     
                 }
-
-                activeArea.colorByMarkers();
             }
-            
+             activeArea.colorByMarkers();  
         }
     }
-
-
-
-
-
-    function setMapOnAll(map) {
-      for (var i = 0; i < markers.length; i++) {
-        markers[i].setMap(map);
-      }
-    }
-
-    function clearMarkers() {
-      setMapOnAll(null);
-    }
-
-    function deleteMarkers() {
-      clearMarkers();
-      markers = [];
-    }
-
 }
 
+function setMapOnAll(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
+
+function clearMarkers() {
+  setMapOnAll(null);
+}
+
+function deleteMarkers() {
+  clearMarkers();
+  markers = [];
+}

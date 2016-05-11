@@ -92,18 +92,7 @@
     <div class="container">
         <h2 class="header text_b">Mapa </h2>
         <div class="row">
-            <div class="col s12 m12">
-                <h4 class="header text_b">Elige tu rubro</h4>
-                <div class="input-field">
-                    <select class="browser-default" id="type">
-                        <option disabled selected>Elige una opción</option>
-                        <option value="bank">Banco</option>
-                        <option value="store">Tienda de servicio</option>
-                        <option value="car_rental">Car Rental</option>
-                        <option value="gym">Gym</option>
-                        <option value="pharmacy">Farmacia</option>
-                    </select>
-                </div>
+             <div class="col s4 m4">
                 <h4 class="header text_b">Comuna</h4>
                 <select class="browser-default" id="area">
                     <option disabled selected>Elige una opción</option>
@@ -111,15 +100,39 @@
                     <option value="macul">Macul</option>
                 </select>
             </div>
-            <div class="col s12 m12">
-                <div class="card" style="height: 400px">
-                    <div id="map" class="card-content" style="height: 400px"></div>
+            <div class="col s4 m4">
+                <h4 class="header text_b">Elige tu rubro</h4>
+                <div class="input-field">
+                    <select disabled class="browser-default" id="type">
+                        <option value="0" disabled selected>Elige una opción</option>
+                        <option value="bank">Banco</option>
+                        <option value="store">Tienda de servicio</option>
+                        <option value="car_rental">Car Rental</option>
+                        <option value="gym">Gym</option>
+                        <option value="pharmacy">Farmacia</option>
+                    </select>
                 </div>
             </div>
-
-            
-           
-
+            <div class="col s4 m4">
+                <h4 class="header text_b">Trafico</h4>
+                <select class="browser-default" id="traffic">
+                    <option value="0" selected>Ninguno</option>
+                    <option value="auto">Automoviles</option>
+                    <option value="bici">Bicicletas</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m12">
+                <div class="card" style="height: 600px">
+                    <div id="map" class="card-content" style="height: 600px"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m12">
+                <a class="waves-effect waves-light btn" href="http://transparencia.penalolen.cl/06_Actos_y_Resoluciones_con_Efectos_Sobre_Terceros/08_Plan_Regulador/plan_regulador.html">Plan Regulador</a>
+            </div>
         </div>
     </div>
 </div>
@@ -141,7 +154,7 @@
 <script src="min/plugin-min.js"></script>
 <script src="min/custom-min.js"></script>
 <script src="js/gmaps.js"></script>
-
+<script src="js/area.js"></script>
 <script src="js/mapa.js"></script>
 <script src="js/searchForPlaces.js"></script>
 <script async defer
