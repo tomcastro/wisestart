@@ -124,14 +124,16 @@
         </div>
         <div class="row">
             <div class="col s12 m12">
-                <div class="card" style="height: 600px">
-                    <div id="map" class="card-content" style="height: 600px"></div>
+                <div class="card" style="height: 400px">
+                    <div id="map" class="card-content" style="height: 400px"></div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col s12 m12">
-                <a class="waves-effect waves-light btn" href="http://transparencia.penalolen.cl/06_Actos_y_Resoluciones_con_Efectos_Sobre_Terceros/08_Plan_Regulador/plan_regulador.html">Plan Regulador</a>
+            <!-- Plan regulador => http://transparencia.penalolen.cl/06_Actos_y_Resoluciones_con_Efectos_Sobre_Terceros/08_Plan_Regulador/plan_regulador.html -->
+
+                <a class="waves-effect waves-light btn" href="/report">Obtener Informe</a>
             </div>
         </div>
     </div>
