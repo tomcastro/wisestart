@@ -28,4 +28,10 @@ class MapController extends Controller
     	
     	return $polygons;
     }
+
+    public function getArea($id){
+        $area = Area::find($id);
+
+        return $area;
+    }
 }
