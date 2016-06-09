@@ -14,6 +14,10 @@ class CreateCoordinatesTable extends Migration
     {
         Schema::create('coordinates', function(Blueprint $table){
             $table->increments('id');
+            $table->double('lat');
+            $table->double('lng');
+            $table->integer('polygon_id')->unsigned();
+            $table->foreign('polygon_id')->references('id')->on('polygons');
         });
     }
 
@@ -24,6 +28,9 @@ class CreateCoordinatesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('coordinates');
+         Schema::table('coordinates', function($table){
+            $table->dropForeign('coordinates_polygon_id_foreign');
+            $table->drop('id');
+        });
     }
 }

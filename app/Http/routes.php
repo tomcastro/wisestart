@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', 'MapController@index');
+Route::get('/area/{id}/polygons', 'MapController@getPolygons');
 Route::get('/report', function () {
     return view('report');
 });

@@ -14,6 +14,9 @@ class CreatePolygonsTable extends Migration
     {
         Schema::create('polygons', function(Blueprint $table){
             $table->increments('id');
+            $table->string('name');
+            $table->integer('area_id')->unsigned();
+            $table->foreign('area_id')->references('id')->on('areas');
         });
     }
 
@@ -24,6 +27,9 @@ class CreatePolygonsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('polygons');
+        Schema::table('polygons', function($table){
+            $table->dropForeign('polygons_area_id_foreign');
+            $table->drop('id');
+        });
     }
 }

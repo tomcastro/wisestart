@@ -1,9 +1,14 @@
 var map;
 var markers = [];
+var activePolygons = [];
 var activeArea;
 var typeSelect = $('#type');
 var areaSelect = $('#area');
 var trafficSelect = $('#traffic');
+
+$(document).ready(function(){
+    
+});
 
 function initMap() {
 
@@ -84,7 +89,8 @@ function initMap() {
 
     map = new google.maps.Map(document.getElementById('map'), {
         center: penalolen.center,
-        zoom: 13
+        zoom: 13,
+        scrollwheel: false
     });
 
 
@@ -105,59 +111,43 @@ function initMap() {
 
     });
 
-    
     areaSelect.on('change', function(){
         let area = this.value;
 
-        if(this.value != null)
-        {   
-            typeSelect.prop('disabled', false);
-            typeSelect.val("0");
+        for(let polygon of activePolygons)
+        {
+            polygon.setMap(null);
         }
-        
 
-        activeArea.clear();
-        deleteMarkers();
+        activePolygons = [];
 
-        switch (area) {
-          case "penalolen":
-            activeArea = penalolen;      
-            break;
-          case "macul":
-            activeArea = macul;
-            break;
+        $.ajax({
+            url: "/area/"+area+"/polygons",
+            success: function(result){
+                console.log(result);
+                for(let polygon of result){
+                    polygon = new google.maps.Polygon({
+                        paths: polygon.coordinates,
+                        strokeColor: '#FF0000',
+                        strokeOpacity: 0.8,
+                        strokeWeight: 2,
+                        fillColor: '#33FFFF',
+                        fillOpacity: 0.35,
+                        editable: false
+                      });
 
-          default:
-            console.log("default");
-            break;
-        }
-        activeArea.resetColor();
-        map.panTo(activeArea.center);
-        activeArea.show();
+                    activePolygons.push(polygon);
+
+                }
+                for(let polygon of activePolygons)
+                    {
+                        polygon.setMap(map);
+                    }
+            }
+        });
     });
-    var bikeLayer = new google.maps.BicyclingLayer();
-    var trafficLayer = new google.maps.TrafficLayer();
+
     
-    trafficSelect.on('change', function(){
-        let type = this.value;
-
-        switch (type) {
-            case "auto":
-                bikeLayer.setMap(null);
-                trafficLayer.setMap(map);
-                break;
-
-            case "bici":
-                trafficLayer.setMap(null);
-                bikeLayer.setMap(map);
-                break;
-
-            default:
-                trafficLayer.setMap(null);
-                bikeLayer.setMap(null);
-                break;
-        }
-    });
     
 
     function createMarker(place) {

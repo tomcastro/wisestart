@@ -9,13 +9,14 @@
     <!-- CSS  -->
     <link href="min/plugin-min.css" type="text/css" rel="stylesheet">
     <link href="min/custom-min.css" type="text/css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+      
+    
 </head>
 <body id="top" class="scrollspy">
 
@@ -96,8 +97,9 @@
                 <h4 class="header text_b">Comuna</h4>
                 <select class="browser-default" id="area">
                     <option disabled selected>Elige una opción</option>
-                    <option value="penalolen">Peñalolen</option>
-                    <option value="macul">Macul</option>
+                    @foreach($areas as $area)
+                        <option value="{{$area->id}}">{{$area->name}}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="col s12 m4">
@@ -132,8 +134,7 @@
         <div class="row">
             <div class="col s12 m12">
             <!-- Plan regulador => http://transparencia.penalolen.cl/06_Actos_y_Resoluciones_con_Efectos_Sobre_Terceros/08_Plan_Regulador/plan_regulador.html -->
-
-                <a class="waves-effect waves-light btn" href="/report">Obtener Informe</a>
+                <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Obtener Informe</a>
             </div>
         </div>
     </div>
@@ -150,6 +151,7 @@
 
 <!--Footer-->
 @include('partials.footer')
+@include('modals.report_modal')
 
 
 <!--  Scripts-->
@@ -157,6 +159,7 @@
 <script src="min/custom-min.js"></script>
 <script src="js/gmaps.js"></script>
 <script src="js/area.js"></script>
+<script src="js/getPolygonsBy.js"></script>
 <script src="js/mapa.js"></script>
 <script src="js/searchForPlaces.js"></script>
 <script async defer

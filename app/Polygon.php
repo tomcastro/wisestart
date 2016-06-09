@@ -10,4 +10,8 @@ class Polygon extends Model
     {
         return $this->belongsTo('App\Area');
     }
+    public function coordinates()
+    {
+        return $this->hasMany('App\Coordinate');
+    }
 }
