@@ -1,4 +1,4 @@
-colorByMarkers(polygon, markersInside){
+function colorByMarkers(polygon, markersInside){
             if(markersInside == 0)
             {
                 polygon.setOptions({fillColor: "#33FFFF"})
@@ -24,5 +24,3 @@ colorByMarkers(polygon, markersInside){
                polygon.setOptions({fillColor: "#FF0000"}); 
             }
         }
-        
-    }

@@ -1,4 +1,4 @@
-function countMarkersInside(polygon){
+function countMarkersInside(polygon, markers){
 	let markersInside = 0;
         for(let value of markers)
         {
@@ -8,3 +8,4 @@ function countMarkersInside(polygon){
             }
         }
         return markersInside;
+   }

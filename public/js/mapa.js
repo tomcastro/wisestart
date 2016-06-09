@@ -19,6 +19,7 @@ function initMap() {
 
     areaSelect.on('change', function(){
         let area = this.value;
+        let areaName = $(this).find('option:selected').text();
 
         if(area != null)
         {   
@@ -36,6 +37,7 @@ function initMap() {
         $.ajax({
             url: "/area/"+area,
             success: function(result){
+                activeArea = result;
                 map.panTo(result);
             }
         });
@@ -44,6 +46,9 @@ function initMap() {
             url: "/area/"+area+"/polygons",
             success: function(result){
                 for(let polygon of result){
+
+                    let polyData = polygon;
+
                     polygon = new google.maps.Polygon({
                         paths: polygon.coordinates,
                         strokeColor: '#FF0000',
@@ -54,41 +59,39 @@ function initMap() {
                         editable: false
                       });
 
-                    var contentString = '<div id="content">'+
-                      '<div id="siteNotice">'+
-                      '</div>'+
-                      '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
-                      '<div id="bodyContent">'+
-                      '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-                      'sandstone rock formation in the southern part of the '+
-                      'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-                      'south west of the nearest large town, Alice Springs; 450&#160;km '+
-                      '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
-                      'features of the Uluru - Kata Tjuta National Park. Uluru is '+
-                      'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-                      'Aboriginal people of the area. It has many springs, waterholes, '+
-                      'rock caves and ancient paintings. Uluru is listed as a World '+
-                      'Heritage Site.</p>'+
-                      '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-                      'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-                      '(last visited June 22, 2009).</p>'+
-                      '</div>'+
-                      '</div>';
-
                     polygon.addListener('click', function(event) {
+
                         infowindow.close();
 
-                        let lat = event.latLng.lat();
-                        let lng = event.latLng.lng();
+                        if(typeSelect.val() && areaSelect.val() && trafficSelect.val()) {
 
-                        let latLng = {'lat': lat, 'lng': lng};
+                            let lat = event.latLng.lat();
+                            let lng = event.latLng.lng();
 
-                        infowindow = new google.maps.InfoWindow({
-                            content: contentString,
-                            position: latLng
-                        });
+                            let latLng = {'lat': lat, 'lng': lng};
 
-                        infowindow.open(map, polygon);
+                            let workType = typeSelect.find('option:selected').text();
+
+                            var strVar = '<div id="content">';
+                            strVar += '<h3 id="firstHeading" class="firstHeading" style="text-align: center">Zona '+polyData.name+'</h3>';
+                            strVar += '<h6 style="text-align: center">('+areaName+')</h6><br>';
+                            strVar += '<h6 style="text-align: center">('+workType+')</h6><br>';
+                            strVar += '<div id="bodyContent" style="text-align: center">';
+                            strVar += '<a class="waves-effect waves-light btn" style="color: white" id="openModal1">Obtener Informe</a>';
+                            strVar += '</div>';
+                            strVar += '</div>';
+
+                            infowindow = new google.maps.InfoWindow({
+                                content: strVar,
+                                position: latLng
+                            });
+
+                            infowindow.open(map, polygon);
+
+                            $('#openModal1').on('click', function() {
+                                generateReport(polyData, polygon, areaSelect, typeSelect, trafficSelect);
+                            });
+                        }
                     });
 
                     activePolygons.push(polygon);
@@ -109,19 +112,13 @@ function initMap() {
         deleteMarkers();
 
         var request = {
-            location: activeArea.center,
+            location: {lat: activeArea.lat, lng: activeArea.lng},
             radius: '3000',
             types: [type]
         };
 
         var search = new google.maps.places.PlacesService(map);
         search.nearbySearch(request, callback);
-        for(let polygon of activePolygons){
-
-            let markers = countMarkersInside(polygon);
-
-        }
-
     });
 
     
@@ -184,8 +181,15 @@ function initMap() {
                     }
                     
                 } 
+
+                let markersInside = countMarkersInside(polygon, markers);
+                colorByMarkers(polygon, markersInside);
             }
              
+        } else {
+            for(let polygon of activePolygons) {
+                colorByMarkers(polygon, 0);
+            }
         }
     }
 }

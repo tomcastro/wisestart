@@ -10,8 +10,10 @@
     <link href="min/plugin-min.css" type="text/css" rel="stylesheet">
     <link href="min/custom-min.css" type="text/css" rel="stylesheet">
     <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="css/custom-style.css">
 
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
@@ -52,7 +54,7 @@
     <div class="container">
         <div class="row">
             <div class="col s12">
-                <h2 class="center header text_h2"> Con EmprendeYA! encontraras toda la <span
+                <h2 class="center header text_h2"> Con EmprendeYA! encontrarás toda la <span
                             class="span_h2"> información</span> territorial que <span class="span_h2"> necesitas</span>
                     antes de <span class="span_h2"> comenzar </span> con tu negocio. </h2>
             </div>
@@ -61,7 +63,7 @@
                 <div class="center promo promo-example">
                     <i class="mdi-social-public"></i>
                     <h5 class="promo-caption">Información Sectorizada</h5>
-                    <p class="light center">Obten la información por sectores de terreno. Nivel de competencia,
+                    <p class="light center">Obtén la información por sectores de terreno. Nivel de competencia,
                         regulación actual, etc..</p>
                 </div>
             </div>
@@ -71,14 +73,14 @@
                     <h5 class="promo-caption"> Diseñado para emprendedores</h5>
                     <p class="light center">Nustro objetivo es darle a nuevos emprendedores con ganas de instalar algún
                         tipo de negocio toda la información importante que deberían saber antes de tomar alguna
-                        decision..</p>
+                        decisión..</p>
                 </div>
             </div>
             <div class="col s12 m4 l4">
                 <div class="center promo promo-example">
                     <i class="mdi-hardware-desktop-windows"></i>
                     <h5 class="promo-caption">Totalmente Web</h5>
-                    <p class="light center">Sin instalaciones de programas dificiles de usar. Diseñado para que el
+                    <p class="light center">Sin instalaciones de programas difíciles de usar. Diseñado para que el
                         usuario pueda usarlo sin ayuda de terceros.</p>
                 </div>
             </div>
@@ -91,7 +93,7 @@
 <!--Work-->
 <div class="section scrollspy" id="work">
     <div class="container">
-        <h2 class="header text_b">Mapa </h2>
+        <h2 class="header text_b">Mapa</h2>
         <div class="row">
              <div class="col s12 m4">
                 <h4 class="header text_b">Comuna</h4>
@@ -110,16 +112,16 @@
                         <option value="bank">Banco</option>
                         <option value="store">Tienda de servicio</option>
                         <option value="car_rental">Car Rental</option>
-                        <option value="gym">Gym</option>
+                        <option value="gym">Gimnasio</option>
                         <option value="pharmacy">Farmacia</option>
                     </select>
                 </div>
             </div>
             <div class="col s12 m4">
-                <h4 class="header text_b">Trafico</h4>
+                <h4 class="header text_b">Tráfico</h4>
                 <select class="browser-default" id="traffic">
                     <option value="0" selected>Ninguno</option>
-                    <option value="auto">Automoviles</option>
+                    <option value="auto">Automóviles</option>
                     <option value="bici">Bicicletas</option>
                 </select>
             </div>
@@ -131,12 +133,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col s12 m12">
             <!-- Plan regulador => http://transparencia.penalolen.cl/06_Actos_y_Resoluciones_con_Efectos_Sobre_Terceros/08_Plan_Regulador/plan_regulador.html -->
-                <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Obtener Informe</a>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -160,6 +157,9 @@
 <script src="js/gmaps.js"></script>
 <script src="js/area.js"></script>
 <script src="js/getPolygonsBy.js"></script>
+<script src="js/countMarkersInside.js"></script>
+<script src="js/colorByMarkers.js"></script>
+<script src="js/generateReport.js"></script>
 <script src="js/mapa.js"></script>
 <script src="js/searchForPlaces.js"></script>
 <script async defer
