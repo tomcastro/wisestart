@@ -113,6 +113,11 @@ function initMap() {
 
     areaSelect.on('change', function(){
         let area = this.value;
+         if(this.value != null)
+        {   
+            typeSelect.prop('disabled', false);
+            typeSelect.val("0");
+        }
 
         for(let polygon of activePolygons)
         {
@@ -147,7 +152,29 @@ function initMap() {
         });
     });
 
+     var bikeLayer = new google.maps.BicyclingLayer();
+    var trafficLayer = new google.maps.TrafficLayer();
     
+    trafficSelect.on('change', function(){
+        let type = this.value;
+
+        switch (type) {
+            case "auto":
+                bikeLayer.setMap(null);
+                trafficLayer.setMap(map);
+                break;
+
+            case "bici":
+                trafficLayer.setMap(null);
+                bikeLayer.setMap(map);
+                break;
+
+            default:
+                trafficLayer.setMap(null);
+                bikeLayer.setMap(null);
+                break;
+        }
+    });
     
 
     function createMarker(place) {
@@ -168,7 +195,7 @@ function initMap() {
 
     function callback(results, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
-            for(let polygon of activeArea.polygons)
+            for(let polygon of activePolygons)
             {
                 for (var i = 0; i < results.length; i++)
                 {
@@ -180,7 +207,7 @@ function initMap() {
                     
                 }
             }
-             activeArea.colorByMarkers();  
+             // deprecated:  activeArea.colorByMarkers();  
         }
     }
 }
