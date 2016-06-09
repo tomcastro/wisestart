@@ -32,7 +32,7 @@
             <div class="col s12 m12">
             	<button id="add_polygon_btn" class="btn"><i class="material-icons left">mode_edit</i>Agregar Poligono</button>
                 <button id="delete_polygon_btn" class="btn red" disabled><i class="material-icons left">delete</i>Borrar Poligono</button>
-                <button id="delete_polygon_btn" class="btn blue right"><i class="material-icons left">done</i>Guardar Poligono</button>
+                <button id="save_polygon_btn" class="btn blue right" disabled><i class="material-icons left">done</i>Guardar Poligono</button>
             </div>
         </div>
     </div>

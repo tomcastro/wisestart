@@ -39,5 +39,6 @@ function initMap() {
 		polygon = null;
 		$(this).prop('disabled', true);
 		addPolyBtn.prop('disabled', false);
+		savePolyBtn.prop('disabled', true);
 	});
 }
