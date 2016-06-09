@@ -35,4 +35,9 @@ class MapController extends Controller
 
         return $area;
     }
+
+    public function edit(){
+        $areas = Area::all();
+        return view('edit', compact('areas'));
+    }
 }

@@ -189,11 +189,6 @@ function initMap() {
                 colorByMarkers(polygon, 0);
             }
         }
-        else{
-            for(let polygon of activePolygons){
-                colorByMarkers(polygon, 0); 
-            }
-        }
     }
 }
 

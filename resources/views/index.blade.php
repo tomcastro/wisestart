@@ -1,25 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-    <meta name="theme-color" content="#2196F3">
-    <title>EmprendeYA!</title>
+@extends('layouts.app')
+@section('scripts')
 
-    <!-- CSS  -->
-    <link href="min/plugin-min.css" type="text/css" rel="stylesheet">
-    <link href="min/custom-min.css" type="text/css" rel="stylesheet">
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="min/plugin-min.js"></script>
+<script src="min/custom-min.js"></script>
+<script src="js/gmaps.js"></script>
+<script src="js/area.js"></script>
+<script src="js/getPolygonsBy.js"></script>
+<script src="js/countMarkersInside.js"></script>
+<script src="js/colorByMarkers.js"></script>
+<script src="js/generateReport.js"></script>
+<script src="js/mapa.js"></script>
+<script src="js/searchForPlaces.js"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDa8MJk2VV9QBkzjnEratB11lpuxkcxgyE&libraries=places&callback=initMap">
+</script>
 
-    <link rel="stylesheet" href="css/custom-style.css">
+@endsection
 
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-      
-    
-</head>
+@section('body')
 <body id="top" class="scrollspy">
 
 <!-- Pre Loader -->
@@ -30,9 +28,6 @@
     <div class="loader-section section-right"></div>
 
 </div>
-
-<!--Navigation-->
-@include('partials.navbar')
 
 <!--Hero-->
 <div class="section no-pad-bot" id="index-banner">
@@ -145,26 +140,7 @@
 </div>
 
 @include('partials.team')
-
-<!--Footer-->
-@include('partials.footer')
 @include('modals.report_modal')
 
-
-<!--  Scripts-->
-<script src="min/plugin-min.js"></script>
-<script src="min/custom-min.js"></script>
-<script src="js/gmaps.js"></script>
-<script src="js/area.js"></script>
-<script src="js/getPolygonsBy.js"></script>
-<script src="js/countMarkersInside.js"></script>
-<script src="js/colorByMarkers.js"></script>
-<script src="js/generateReport.js"></script>
-<script src="js/mapa.js"></script>
-<script src="js/searchForPlaces.js"></script>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDa8MJk2VV9QBkzjnEratB11lpuxkcxgyE&libraries=places&callback=initMap">
-</script>
-
 </body>
-</html>
+@endsection

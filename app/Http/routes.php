@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'MapController@index');
+Route::get('/edit', 'MapController@edit');
 Route::get('/area/{id}/polygons', 'MapController@getPolygons');
 Route::get('/area/{id}', 'MapController@getArea');
 Route::get('/report', function () {

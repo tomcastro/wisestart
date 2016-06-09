@@ -2,16 +2,16 @@
     <nav id="nav_f" class="default_color" role="navigation">
         <div class="container">
             <div class="nav-wrapper">
-                <a href="#" id="logo-container" class="brand-logo">EmprendeYA!</a>
+                <a href="/" id="logo-container" class="brand-logo">EmprendeYA!</a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="#intro">Servicios</a></li>
-                    <li><a href="#work">Editar</a></li>
+                    <li><a href="/edit">Editar</a></li>
                     <li><a href="#team">Team</a></li>
                     <li><a href="#contact">Contacto</a></li>
                 </ul>
                 <ul id="nav-mobile" class="side-nav">
                     <li><a href="#intro">Servicios</a></li>
-                    <li><a href="#work">Editar</a></li>
+                    <li><a href="/edit">Editar</a></li>
                     <li><a href="#team">Team</a></li>
                     <li><a href="#contact">Contacto</a></li>
                 </ul>
