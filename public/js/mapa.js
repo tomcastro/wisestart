@@ -1,43 +1,208 @@
 var map;
+var markers = [];
+var activePolygons = [];
+var activeArea;
+var infowindow;
+var typeSelect = $('#type');
+var areaSelect = $('#area');
+var trafficSelect = $('#traffic');
 
 function initMap() {
-    var penalolen = new google.maps.LatLng(-33.4857978,-70.5487625);
 
     map = new google.maps.Map(document.getElementById('map'), {
-        center: penalolen,
-        zoom: 14
+        center: {lat: -33.4857978, lng: -70.5487625},
+        zoom: 13,
+        scrollwheel: false
     });
 
-    var select = $('#rubro');
+    infowindow = new google.maps.InfoWindow();
 
-    select.on('change', function(){
-        var value = this.value;
+    areaSelect.on('change', function(){
+        let area = this.value;
+
+        if(area != null)
+        {   
+            typeSelect.prop('disabled', false);
+            typeSelect.val("0");
+        }
+
+        for(let polygon of activePolygons)
+        {
+            polygon.setMap(null);
+        }
+
+        activePolygons = [];
+
+        $.ajax({
+            url: "/area/"+area,
+            success: function(result){
+                activeArea = result;
+                map.panTo(result);
+            }
+        });
+
+        $.ajax({
+            url: "/area/"+area+"/polygons",
+            success: function(result){
+                for(let polygon of result){
+                    polygon = new google.maps.Polygon({
+                        paths: polygon.coordinates,
+                        strokeColor: '#FF0000',
+                        strokeOpacity: 0.8,
+                        strokeWeight: 2,
+                        fillColor: '#33FFFF',
+                        fillOpacity: 0.35,
+                        editable: false
+                      });
+
+                    var contentString = '<div id="content">'+
+                      '<div id="siteNotice">'+
+                      '</div>'+
+                      '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+                      '<div id="bodyContent">'+
+                      '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+                      'sandstone rock formation in the southern part of the '+
+                      'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
+                      'south west of the nearest large town, Alice Springs; 450&#160;km '+
+                      '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
+                      'features of the Uluru - Kata Tjuta National Park. Uluru is '+
+                      'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
+                      'Aboriginal people of the area. It has many springs, waterholes, '+
+                      'rock caves and ancient paintings. Uluru is listed as a World '+
+                      'Heritage Site.</p>'+
+                      '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
+                      'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+                      '(last visited June 22, 2009).</p>'+
+                      '</div>'+
+                      '</div>';
+
+                    polygon.addListener('click', function(event) {
+                        infowindow.close();
+
+                        let lat = event.latLng.lat();
+                        let lng = event.latLng.lng();
+
+                        let latLng = {'lat': lat, 'lng': lng};
+
+                        infowindow = new google.maps.InfoWindow({
+                            content: contentString,
+                            position: latLng
+                        });
+
+                        infowindow.open(map, polygon);
+                    });
+
+                    activePolygons.push(polygon);
+
+                }
+                for(let polygon of activePolygons)
+                    {
+                        polygon.setMap(map);
+                    }
+            }
+        });
+    });
+
+
+    typeSelect.on('change', function(){
+        var type = this.value;
+
+        deleteMarkers();
 
         var request = {
-            location: penalolen,
-            radius: '500',
-            query: 'restaurant'
+            location: {lat: activeArea.lat, lng: activeArea.lng},
+            radius: '3000',
+            types: [type]
         };
 
         var search = new google.maps.places.PlacesService(map);
-        search.textSearch(request, callback);
-    });
-}
+        search.nearbySearch(request, callback);
 
-function callback(results, status) {
-    if (status == google.maps.places.PlacesServiceStatus.OK) {
-        for (var i = 0; i < results.length; i++) {
-            var place = results[i];
-            createMarker(place);
+    });
+
+    
+    var bikeLayer = new google.maps.BicyclingLayer();
+    var trafficLayer = new google.maps.TrafficLayer();
+    
+    trafficSelect.on('change', function(){
+        let type = this.value;
+
+        switch (type) {
+            case "auto":
+                bikeLayer.setMap(null);
+                trafficLayer.setMap(map);
+                break;
+
+            case "bici":
+                trafficLayer.setMap(null);
+                bikeLayer.setMap(map);
+                break;
+
+            case "loco":
+                trafficLayer.setMap(null);
+                bikeLayer.setMap(map);
+                break;
+
+            default:
+                trafficLayer.setMap(null);
+                bikeLayer.setMap(null);
+                break;
+        }
+    });
+    
+
+    function createMarker(place) {
+        var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location
+        });
+        markers.push(marker);
+        var infowindow = new google.maps.InfoWindow({
+           content: place.name
+        });
+        marker.addListener('click', function() {
+        infowindow.open(map, marker);
+
+        });
+    }
+
+    function callback(results, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+            for(let polygon of activePolygons)
+            {
+                for (var i = 0; i < results.length; i++)
+                {
+                    var place = results[i];
+                    if(google.maps.geometry.poly.containsLocation(place.geometry.location, polygon))
+                    {
+                        createMarker(place);
+                    }
+                    
+                }
+                let markersInside = countMarkersInside(polygon, markers);
+                colorByMarkers(polygon, markersInside); 
+            }
+             
+        }
+        else{
+            for(let polygon of activePolygons){
+                colorByMarkers(polygon, 0); 
+            }
         }
     }
 }
 
-function createMarker(place) {
-    var marker = new google.maps.Marker({
-        map: map,
-        title: place.name,
-        position: place.geometry.location
-    });
+function setMapOnAll(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
 }
 
+function clearMarkers() {
+  setMapOnAll(null);
+}
+
+function deleteMarkers() {
+  clearMarkers();
+  markers = [];
+}
