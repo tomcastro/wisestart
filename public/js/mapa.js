@@ -36,6 +36,7 @@ function initMap() {
         $.ajax({
             url: "/area/"+area,
             success: function(result){
+                activeArea = result;
                 map.panTo(result);
             }
         });
@@ -109,18 +110,13 @@ function initMap() {
         deleteMarkers();
 
         var request = {
-            location: activeArea.center,
+            location: {lat: activeArea.lat, lng: activeArea.lng},
             radius: '3000',
             types: [type]
         };
 
         var search = new google.maps.places.PlacesService(map);
         search.nearbySearch(request, callback);
-        for(let polygon of activePolygons){
-
-            let markers = countMarkersInside(polygon);
-
-        }
 
     });
 
@@ -164,7 +160,6 @@ function initMap() {
         var infowindow = new google.maps.InfoWindow({
            content: place.name
         });
-
         marker.addListener('click', function() {
         infowindow.open(map, marker);
 
@@ -183,9 +178,16 @@ function initMap() {
                         createMarker(place);
                     }
                     
-                } 
+                }
+                let markersInside = countMarkersInside(polygon, markers);
+                colorByMarkers(polygon, markersInside); 
             }
              
+        }
+        else{
+            for(let polygon of activePolygons){
+                colorByMarkers(polygon, 0); 
+            }
         }
     }
 }
