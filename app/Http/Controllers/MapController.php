@@ -34,4 +34,8 @@ class MapController extends Controller
 
         return $area;
     }
+
+    public function edit(){
+        return view('edit');
+    }
 }
