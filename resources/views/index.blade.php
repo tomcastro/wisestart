@@ -3,7 +3,6 @@
 <script src="min/plugin-min.js"></script>
 <script src="min/custom-min.js"></script>
 <script src="js/gmaps.js"></script>
-<script src="js/area.js"></script>
 <script src="js/getPolygonsBy.js"></script>
 <script src="js/countMarkersInside.js"></script>
 <script src="js/colorByMarkers.js" ></script>
