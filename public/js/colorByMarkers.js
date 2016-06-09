@@ -24,4 +24,3 @@ function colorByMarkers(polygon, markersInside){
                polygon.setOptions({fillColor: "#FF0000"}); 
             }
         }
-        
