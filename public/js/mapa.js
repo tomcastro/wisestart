@@ -2,10 +2,10 @@ var map;
 var markers = [];
 var activePolygons = [];
 var activeArea;
+var infowindow;
 var typeSelect = $('#type');
 var areaSelect = $('#area');
 var trafficSelect = $('#traffic');
-
 
 function initMap() {
 
@@ -15,6 +15,7 @@ function initMap() {
         scrollwheel: false
     });
 
+    infowindow = new google.maps.InfoWindow();
 
     areaSelect.on('change', function(){
         let area = this.value;
@@ -53,6 +54,43 @@ function initMap() {
                         fillOpacity: 0.35,
                         editable: false
                       });
+
+                    var contentString = '<div id="content">'+
+                      '<div id="siteNotice">'+
+                      '</div>'+
+                      '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+                      '<div id="bodyContent">'+
+                      '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+                      'sandstone rock formation in the southern part of the '+
+                      'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
+                      'south west of the nearest large town, Alice Springs; 450&#160;km '+
+                      '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
+                      'features of the Uluru - Kata Tjuta National Park. Uluru is '+
+                      'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
+                      'Aboriginal people of the area. It has many springs, waterholes, '+
+                      'rock caves and ancient paintings. Uluru is listed as a World '+
+                      'Heritage Site.</p>'+
+                      '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
+                      'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+                      '(last visited June 22, 2009).</p>'+
+                      '</div>'+
+                      '</div>';
+
+                    polygon.addListener('click', function(event) {
+                        infowindow.close();
+
+                        let lat = event.latLng.lat();
+                        let lng = event.latLng.lng();
+
+                        let latLng = {'lat': lat, 'lng': lng};
+
+                        infowindow = new google.maps.InfoWindow({
+                            content: contentString,
+                            position: latLng
+                        });
+
+                        infowindow.open(map, polygon);
+                    });
 
                     activePolygons.push(polygon);
 
