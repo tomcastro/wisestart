@@ -161,7 +161,6 @@ function initMap() {
         var infowindow = new google.maps.InfoWindow({
            content: place.name
         });
-
         marker.addListener('click', function() {
         infowindow.open(map, marker);
 
@@ -179,7 +178,6 @@ function initMap() {
                     {
                         createMarker(place);
                     }
-                    
                 } 
 
                 let markersInside = countMarkersInside(polygon, markers);
@@ -189,6 +187,11 @@ function initMap() {
         } else {
             for(let polygon of activePolygons) {
                 colorByMarkers(polygon, 0);
+            }
+        }
+        else{
+            for(let polygon of activePolygons){
+                colorByMarkers(polygon, 0); 
             }
         }
     }
