@@ -160,6 +160,8 @@
 <script src="js/gmaps.js"></script>
 <script src="js/area.js"></script>
 <script src="js/getPolygonsBy.js"></script>
+<script src="js/countMarkersInside.js"></script>
+<script src="js/colorByMarkers.js" ></script>
 <script src="js/mapa.js"></script>
 <script src="js/searchForPlaces.js"></script>
 <script async defer
