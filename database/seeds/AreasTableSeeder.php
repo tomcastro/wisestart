@@ -12,7 +12,7 @@ class AreasTableSeeder extends Seeder
     public function run()
     {
         DB::table('areas')->insert([
-        	'name'=> 'Peñalolen',
+        	'name'=> 'Peñalolén',
         	'lat' => -33.4857978,
         	'lng' => -70.5487625,
         	]);

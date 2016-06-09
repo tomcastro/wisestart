@@ -13,7 +13,7 @@ class PolygonTableSeeder extends Seeder
     {
           DB::table('polygons')->insert([
         	'area_id' => '1',
-            'name' => 'polygon_1'
+            'name' => 'ZHM-5'
         	]);
     }
 }

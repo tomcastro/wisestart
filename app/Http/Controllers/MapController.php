@@ -22,6 +22,7 @@ class MapController extends Controller
 
     	foreach ($polygons as $key => $polygon) {
     		$coordinates = Polygon::find($polygon->id)->coordinates;
+            //$areaName = Polygon::find($polygon->id)
     		$polygon->coordinates = $coordinates;
     	}
     	
@@ -33,5 +34,10 @@ class MapController extends Controller
         $area = Area::find($id);
 
         return $area;
+    }
+
+    public function edit(){
+        $areas = Area::all();
+        return view('edit', compact('areas'));
     }
 }
