@@ -14,13 +14,9 @@
 @endsection
 @section('body')
 <div class="section scrollspy" id="work">
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <div class="container">
-        <h2 class="header text_b">Mapa </h2>
-        <div class="row">
-        	<div class="col s12 m12">
-
-        	</div>
-        </div>
+        <h2 class="header text_b">Agregar Sectores a una comuna </h2>
         <div class="row">
             <div class="col s12 m12">
                 <div class="card" style="height: 400px">
@@ -35,6 +31,17 @@
                 <button id="save_polygon_btn" class="btn blue right" disabled><i class="material-icons left">done</i>Guardar Poligono</button>
             </div>
         </div>
+        <div class="row">
+            <div class="col s4 m4">
+                <select class="browser-default" id="area_polygon_select">
+                    <option disabled selected>Elige una comuna</option>
+                    @foreach($areas as $area)
+                        <option value="{{$area->id}}">{{$area->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="divider"></div>       
     </div>
 </div>
 @endsection
