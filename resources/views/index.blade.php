@@ -8,6 +8,7 @@
 <script src="js/getPolygonsBy.js"></script>
 <script src="js/countMarkersInside.js"></script>
 <script src="js/colorByMarkers.js"></script>
+<script src="js/setOnMap.js"></script>
 <script src="js/generateReport.js"></script>
 <script src="js/mapa.js"></script>
 <script src="js/searchForPlaces.js"></script>
@@ -130,7 +131,7 @@
         </div>
             <!-- Plan regulador => http://transparencia.penalolen.cl/06_Actos_y_Resoluciones_con_Efectos_Sobre_Terceros/08_Plan_Regulador/plan_regulador.html -->
     </div>
-</div>
+</div><!--/section-->
 
 
 
